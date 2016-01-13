@@ -1,12 +1,12 @@
 ## Advanced Computational Methods - Problem Set #1
 
-# Exercise 1
+### Exercise 1
 
   * The generated data set is for simplicity limited to either two or three dimensions. This can be relaxed but be aware of the [curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality) when accounting for how many points will fall inside the hypersphere.
 
   * Bear in mind that the results will be generated in R's working directory: its default directory if not otherwise specified.
 
-# Exercise 2
+### Exercise 2
 
   * It is unclear to me if this exercise requires to write a function or have only the executable code in the script. Thus, the script contains a function that carries out the exercise and it executes it at the end, to cover all possibilities.
 
