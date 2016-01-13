@@ -20,7 +20,7 @@ if (FALSE) {
 # URL: https://cran.r-project.org/web/packages/mlbench/mlbench.pdf
 gen.data <- function(n, features = 2, seed = NA, mus = NULL, sigma = NULL,
                      store = TRUE, pic = TRUE) {
-# (c) Miquel Torrens, 2015.01.11
+# (c) Miquel Torrens, 2016.01.11
 # n : number of observation for the dataset
 # features : number of features generated
 # seed : preferred seed
