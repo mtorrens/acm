@@ -10,8 +10,8 @@
 
   * It is unclear to me if this exercise requires to write a function or have only the executable code in the script. Thus, the script contains a function that carries out the exercise and it executes it at the end, to cover both possibilities.
 
-  * The function has a logical argument called `dashed`, which specifies whether the generated plot displays the discriminant functions dashed in the part where the function is not used. If the argument is set to `FALSE` then the plot shows the functions fully colored on its domain. If it is set to `TRUE`, the plot is built in a more manual manner. The code is uglier as it requires to find the intersection points of the functions and plot them accordingly, but the output is nicer. Also, this parameter is disabled if the function is unsure on which are the applying boundaries (which part of the function should be dashed).
+  * The function has a logical argument called `dashed`, which specifies whether the generated plot displays the discriminant functions dashed in the part where the function has no effect. If the argument is set to `FALSE` then the plot shows the functions fully colored on its domain. If it is set to `TRUE`, the plot is built in a more manual manner. The code is uglier as it requires to find the intersection points of the functions and plot them accordingly, but the output is nicer. Also, this parameter is disabled if the function is unsure on which are the applying boundaries (which part of the function should be dashed).
 
-### Exercise 2
+### Exercise 3
 
   * The app is under construction.
