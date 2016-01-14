@@ -11,7 +11,7 @@
 ################################################################################
 
 # Set working directory
-if (FALSE) {
+if (TRUE) {
   setwd('~/Desktop/bgse/projects/github/acm/PS1/')
 }
 
@@ -65,14 +65,19 @@ loan.data <- function(n.app, n.den, n.und, mu.app, mu.den, mu.und, sd.app,
 
 ################################################################################
 # Function that carries out the exercise
-loanData3C <- function(store = TRUE, pic = TRUE, dashed = TRUE) {
-################################################################################
-  # Build the data frame
-  loan.df <- loan.data(n.app = 50, n.den = 50, n.und = 50, mu.app = c(4, 150),
+loanData3C <- function(store = TRUE, pic = TRUE, dashed = TRUE, n.app = 50,
+                       n.den = 50, n.und = 50, mu.app = c(4, 150),
                        mu.den = c(10, 100), mu.und = c(9, 200),
                        sd.app = c(1, 20), sd.den = c(2, 30), sd.und = c(1, 10),
                        rho.app = -0.1, rho.den = 0.6, rho.und = 0.5,
-                       seed = 1221)
+                       seed = 1221) {
+################################################################################
+  # Build the data frame
+  loan.df <- loan.data(n.app = n.app, n.den = n.den, n.und = n.und,
+                       mu.app = mu.app, mu.den = mu.den, mu.und = mu.und,
+                       sd.app = sd.app, sd.den = sd.den, sd.und = sd.und,
+                       rho.app = rho.app, rho.den = rho.den, rho.und = rho.und,
+                       seed = seed)
 
   # Rebuild the data frame for prediction
   n.app <- 50
@@ -115,7 +120,8 @@ loanData3C <- function(store = TRUE, pic = TRUE, dashed = TRUE) {
   slo3 <- (w[3, 2] - w[3, 3]) / (w[2, 3] - w[2, 2])
 
   # Plot them
-  if (dashed == FALSE) {
+  if (dashed == FALSE || any(mu.und != c(9, 200)) || any(sd.und != c(1, 10)) ||
+      rho.und != 0.5) {
     plot1 <- ggplot(data = loan.df,
                     aes(x = solvency,
                         y = pi_ratio,
@@ -133,16 +139,12 @@ loanData3C <- function(store = TRUE, pic = TRUE, dashed = TRUE) {
     # Where the three equations intersect
     meet.x <- (int2 - int1) / (slo1 - slo2)
     meet.y <- int1 + slo1 * meet.x
-
     x1 <- 0.5 * min(loan.df[, 'solvency'])
     x2 <- 1.2 * max(loan.df[, 'solvency'])
-
     y11 <- int1 + slo1 * x1
     y12 <- int1 + slo1 * x2
     y21 <- int2 + slo2 * x1
-    #y21 <- int2 + slo2 * 142  # Special case
     y22 <- int2 + slo2 * x2
-    #y22 <- int2 + slo2 * 167  # Special case
     y31 <- int3 + slo3 * x1
     y32 <- int3 + slo3 * x2
 
@@ -156,9 +158,7 @@ loanData3C <- function(store = TRUE, pic = TRUE, dashed = TRUE) {
                     geom_segment(x = x1, y = y11, xend = meet.x, yend = meet.y, col = 'black') +
                     geom_segment(x = x2, y = y12, xend = meet.x, yend = meet.y, lty = 3, col = 'black') +
                     geom_segment(x = x1, y = y21, xend = meet.x, yend = meet.y, lty = 3, col = 'black') +
-                    #geom_segment(x = 142, y = y21, xend = meet.x, yend = meet.y, lty = 3, col = 'black') +
                     geom_segment(x = x2, y = y22, xend = meet.x, yend = meet.y, col = 'black') +
-                    #geom_segment(x = 167, y = y22, xend = meet.x, yend = meet.y, col = 'black') +
                     geom_segment(x = x1, y = y31, xend = meet.x, yend = meet.y, lty = 3, col = 'black') +
                     geom_segment(x = x2, y = y32, xend = meet.x, yend = meet.y, col = 'black')    
   }
