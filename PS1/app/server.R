@@ -47,6 +47,8 @@ loanData <- function(noApproved, noDenied, muApproved, muDenied, sdApproved,
 
 # Library
 library(shiny)
+library(mvtnorm)
+library(ggplot2)
 
 # Server
 function(input, output) {
