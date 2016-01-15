@@ -193,4 +193,5 @@ loanData3C <- function(store = TRUE, pic = TRUE, dashed = TRUE, n.app = 50,
 
 # Run it
 loanData3C()
+#loanData3C(mu.und = c(15, 180), sd.und = c(2, 15), rho.und = 0.8)
 # END OF SCRIPT
