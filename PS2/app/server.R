@@ -7,29 +7,36 @@
 # Title  : Problem Set #1 (Part 3)
 # Date   : 2016.01.14
 ################################################################################
-# source('~/Desktop/bgse/projects/github/acm/PS1/app/server.R')
+# source('~/Desktop/bgse/projects/github/acm/PS2/app/server.R')
 ################################################################################
 
-################################################################################
-# Professor's code
-################################################################################
-# create small wrapper functions
-sigmaXY <- function(rho, sdX, sdY) {
+# Library
+library(shiny)
+library(mvtnorm)
+library(ggplot2)
+
+# Server
+shinyServer(function(input, output) {
+  ##############################################################################
+  # Professor's code
+  ##############################################################################
+  # create small wrapper functions
+  sigmaXY <- function(rho, sdX, sdY) {
     covTerm <- rho * sdX * sdY
     VCmatrix <- matrix(c(sdX^2, covTerm, covTerm, sdY^2), 
                        2, 2, byrow = TRUE)
     return(VCmatrix)
-}
-
-genBVN <- function(n = 1, seed = NA, muXY=c(0,1), sigmaXY=diag(2)) {
+  }
+  
+  genBVN <- function(n = 1, seed = NA, muXY=c(0,1), sigmaXY=diag(2)) {
     if(!is.na(seed)) set.seed(seed)
     rdraws <- rmvnorm(n, mean = muXY, sigma = sigmaXY)
     return(rdraws)
-}
-
-# creating a function for all of this
-loanData <- function(noApproved, noDenied, muApproved, muDenied, sdApproved, 
-                        sdDenied, rhoApproved, rhoDenied, seed=1111) {
+  }
+  
+  # creating a function for all of this
+  loanData <- function(noApproved, noDenied, muApproved, muDenied, sdApproved, 
+                       sdDenied, rhoApproved, rhoDenied, seed=1111) {
     sigmaApproved <- sigmaXY(rho=rhoApproved, sdX=sdApproved[1], sdY=sdApproved[2])
     sigmaDenied <- sigmaXY(rho=rhoDenied, sdX=sdDenied[1], sdY=sdDenied[2])
     approved <- genBVN(noApproved, muApproved, sigmaApproved, seed = seed)
@@ -40,19 +47,12 @@ loanData <- function(noApproved, noDenied, muApproved, muDenied, sdApproved,
     loanDf <- data.frame(loanDf, deny, target)
     colnames(loanDf) <- c("PIratio", "solvency", "deny", "target")
     return(loanDf)
-}
-################################################################################
-# END Professor's code
-################################################################################
+  }
+  ##############################################################################
+  # END Professor's code
+  ##############################################################################
 
-# Library
-library(shiny)
-library(mvtnorm)
-library(ggplot2)
-
-# Server
-function(input, output) {
-  # Simulate the data
+  # Simulate the data
   res <- reactive({
     loanData(50, 50,
              c(input$mean.x.app, input$mean.y.app),
@@ -87,5 +87,5 @@ function(input, output) {
   output$conf.matrix <- renderTable({
     table(res()[, 'deny'], preds())
   })
-}
+})
 # END OF SCRIPT

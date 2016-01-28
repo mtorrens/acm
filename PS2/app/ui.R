@@ -7,14 +7,14 @@
 # Title  : Problem Set #1 (Part 3)
 # Date   : 2016.01.14
 ################################################################################
-# source('~/Desktop/bgse/projects/github/acm/PS1/app/ui.R')
+# source('~/Desktop/bgse/projects/github/acm/PS2/app/ui.R')
 ################################################################################
 
 # Library
 library(shiny)
 
 # UI
-fluidPage(
+shinyUI(fluidPage(
   tags$h1('Binary classification: Discriminant functions'),
   tags$h5('Shiny app built by Miquel Torrens (c) 2016'),
   tags$h2('Parameter settings'),
@@ -55,5 +55,5 @@ fluidPage(
       tags$h3('Confusion matrix'),
       tableOutput('conf.matrix')
   )
-)
+))
 # END OF SCRIPT
