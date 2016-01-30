@@ -16,10 +16,10 @@ kNN <- function(features, labels, k = 3, p = 2, action = 'train') {
 # features : (matrix) object with feature values
 # labels   : (character) vector with true labels
 # k        : (integer) Number of nearest neighbors to consider
-# p        : (double) (1)   Manhattan,
-#                     (2)   Euclidean,
-#                     ...
-#                     (Inf) Chebyshev
+# p        : (numeric) (1)   Manhattan,
+#                      (2)   Euclidean,
+#                      ...
+#                      (Inf) Chebyshev
 # action   : (character) choose among "train" or "test"
 ################################################################################
   # Class checkings
