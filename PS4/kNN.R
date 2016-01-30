@@ -20,7 +20,7 @@ kNN <- function(features, labels, k = 3, p = 2, action = 'train') {
 #                     (2)   Euclidean,
 #                     ...
 #                     (Inf) Chebyshev
-# action   : (character)
+# action   : (character) choose among "train" or "test"
 ################################################################################
   # Class checkings
   if (class(features) != 'matrix') {
