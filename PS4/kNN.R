@@ -90,10 +90,12 @@ kNN <- function(features, labels, k = 3, p = 2, action = 'train') {
   prob <- rep(NA, length = nobs)
   aux <- lapply(1:nobs, function(x) {
     if (action == 'train') {
-      counts <- table(labels[nb[2:(k + 1), x]])
+      counts <- table(labels[nb[1:k, x]])
+      #counts <- table(labels[nb[2:(k + 1), x]])
     } else {
       # Kick out those without true labels
-      chosen <- nb[which(nb[, x] %in% no.nas), x][2:(k + 1)]
+      chosen <- nb[which(nb[, x] %in% no.nas), x][1:k]
+      #chosen <- nb[which(nb[, x] %in% no.nas), x][2:(k + 1)]
       counts <- table(labels[chosen])
     }    
     winner <- which.max(counts)
