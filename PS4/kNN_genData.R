@@ -11,14 +11,11 @@
 ################################################################################
 
 # Library requirements
-if (! require(mvtnorm)) { install.packages('mvtnorm'); library(mvtnorm) }
-if (! require(MASS)) { install.packages('MASS'); library(MASS) }
-if (! require(class)) { install.packages('class'); library(class) }
-if (! require(ggplot2)) { install.packages('ggplot2'); library(ggplot2) }
-if (! require(RColorBrewer)) {
-  install.packages('RColorBrewer')
-  library(RColorBrewer)
-}
+library(mvtnorm)
+library(MASS)
+library(class)
+library(ggplot2)
+library(RColorBrewer)
 
 # Directory of the code
 PATH <- '~/Desktop/bgse/courses/term2/acm/problemSets/PS4/'
@@ -66,6 +63,7 @@ exty <- c(y, rep(NA, nrow(newx)))
 yhat <- kNN(extx, exty, k = 3, p = 2, action = 'test')
 #yhat <- knn(x, newx, y, k = 3)
 yhat <- yhat[['predLabels']]
+#yhat <- yhat[['probs']]
 yhat <- yhat[(nrow(x) + 1):nrow(rbind(x, newx))]
 colshat <- colors[as.numeric(yhat)]
 
