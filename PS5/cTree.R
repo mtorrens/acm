@@ -57,6 +57,10 @@ train.tree <- function(formula, data, depth, minPoints, costFnc, parent = 0) {
 # parent    (numeric): parent node (DO NOT CHANGE: used in recursion)
 ################################################################################
   ##############################################################################
+  # Starting node
+  if (is.null(parent)) { parent <- 0 }
+  if (parent == 0) { depth <- depth + 1 }
+
   # Stop recursion
   if (nrow(data) <= minPoints || depth <= 1) {
     # Record an empty node
@@ -74,14 +78,14 @@ train.tree <- function(formula, data, depth, minPoints, costFnc, parent = 0) {
     # End
     return(NULL)
   }
-
-  # Starting node
-  if (is.null(parent)) { parent <- 0 }
   ##############################################################################  
 
   ##############################################################################
   # Define sets
   vars <- all.vars(formula)
+  if (vars[2] == '.') {
+    vars <- c(vars[1], colnames(data)[! colnames(data) %in% vars])
+  }
   data <- data[, c(which(colnames(data) != vars[1]),
                    which(colnames(data) == vars[1]))]
   y.idx <- which(colnames(data) == vars[1])
@@ -98,8 +102,8 @@ train.tree <- function(formula, data, depth, minPoints, costFnc, parent = 0) {
   best.sets <- NA
 
   # Number of features and observations
-  nfeats <- (1:ncol(data))[1:ncol(data) != y.idx]
   nobs <- nrow(data)
+  nfeats <- (1:ncol(data))[1:ncol(data) != y.idx]
   members <- paste(rownames(data), collapse = ',')
   ##############################################################################
 
