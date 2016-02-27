@@ -70,13 +70,8 @@ train.tree <- function(formula, data, depth, minPoints, costFnc,
                             node = NA,
                             depth = depth,
                             members = members)
-    if (set == 1) {
-      best.crit[, 'node'] <- length(bcrit) + 1
-      bcrit[[length(bcrit) + 1]] <<- best.crit
-    } else if (set == 2) {
-      best.crit[, 'node'] <- length(bcrit) + 1
-      bcrit[[length(bcrit) + 1]] <<- best.crit
-    }
+    best.crit[, 'node'] <- length(bcrit) + 1
+    bcrit[[length(bcrit) + 1]] <<- best.crit
 
     # End
     return(NULL)
@@ -157,19 +152,13 @@ train.tree <- function(formula, data, depth, minPoints, costFnc,
 
   ##############################################################################
   # Accumulate results
-  #print(nfeats)
   if (! 'bcrit' %in% ls(envir = .GlobalEnv)) {
     bcrit <<- vector(mode = 'list', length = 1)
     bcrit[[1]] <<- best.crit
   } else {
     chosen <- which(sapply(bcrit, `[`, 4) == parent)
-    if (set == 1) {
-      best.crit[, 'node'] <- length(bcrit) + 1
-      bcrit[[length(bcrit) + 1]] <<- best.crit
-    } else if (set == 2) {
-      best.crit[, 'node'] <- length(bcrit) + 1
-      bcrit[[length(bcrit) + 1]] <<- best.crit
-    }
+    best.crit[, 'node'] <- length(bcrit) + 1
+    bcrit[[length(bcrit) + 1]] <<- best.crit
   }
 
   # End
@@ -248,8 +237,6 @@ cTree <- function(formula, data, test = NULL, depth, minPoints = 1,
   # Change depth scale (just for beauty)
   aux <- cbind(1:max(depth), max(depth):1)
   tree[, 'depth'] <- aux[match(tree[, 'depth'], aux[, 1]), 2]
-
-  print(tree)
   ##############################################################################
 
   ##############################################################################
