@@ -48,15 +48,13 @@ cost <- function(data, col.idx, fun) {
 }
 
 ################################################################################
-train.tree <- function(formula, data, depth, minPoints, costFnc,
-                       parent = 0, set = 0) {
+train.tree <- function(formula, data, depth, minPoints, costFnc, parent = 0) {
 # formula   (formula): formula for the regression tree
 # data   (data.frame): data frame with the features
 # depth     (numeric): depth of the tree
 # minPoints (numeric): minimum number of points in a region
 # costFnc (character): cost function used to grow the tree
 # parent    (numeric): parent node (DO NOT CHANGE: used in recursion)
-# set       (numeric): index of set in split (DO NOT CHANGE: recursion)
 ################################################################################
   ##############################################################################
   # Stop recursion
@@ -171,9 +169,9 @@ train.tree <- function(formula, data, depth, minPoints, costFnc,
   # Recursion
   ndepth <- depth - 1
   ns1 <- train.tree(formula, data = best.sets[[1]], ndepth, minPoints, costFnc,
-                    parent = best.crit[, 'node'], set = 1)
+                    parent = best.crit[, 'node'])
   ns2 <- train.tree(formula, data = best.sets[[2]], ndepth, minPoints, costFnc,
-                    parent = best.crit[, 'node'], set = 2)
+                    parent = best.crit[, 'node'])
   ##############################################################################
 }
 
