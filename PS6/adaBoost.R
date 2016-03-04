@@ -4,10 +4,10 @@
 # Course : Avanced Computational Methods
 ################################################################################
 # Author : (c) Miquel Torrens
-# Title  : Problem Set #5 (Part 1)
-# Date   : 2016.02.21
+# Title  : Problem Set #6 (Part 1)
+# Date   : 2016.03.03
 ################################################################################
-# source('~/Desktop/bgse/courses/term2/acm/problemSets/PS5/cTree.R')
+# source('~/Desktop/bgse/courses/term2/acm/problemSets/PS6/adaBoost.R')
 ################################################################################
 
 ################################################################################
