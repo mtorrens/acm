@@ -81,14 +81,13 @@ adaBoost <- function(formula, data, test = NULL, depth, noTrees, ...) {
   m <- 1
   alphas <- rep(NA, length = M)
   pm <- as.data.frame(matrix(ncol = M, nrow = n))
-
   trees <- vector(mode = 'list', length = M)
 
   # Loop to perform adaboost
   repeat {
     # Calculate classifier
     tree <- rpart(formula = nf, data = data, weights = w,
-                  control = rpart.control(maxdepth = depth))#, ...)
+                  control = rpart.control(maxdepth = depth), ...)
     preds <- predict(tree, data, type = 'class')
 
     # Collect predictions
