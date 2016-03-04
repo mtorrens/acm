@@ -79,10 +79,11 @@ acc3 <- mean(sign(predict(boost, test)) == ifelse(test[, 'y'] == '1', 1, -1))
 cat('Out-sample performance: ', 100 * round(acc3, 3), '%\n', sep = '')
 
 # See for different number of iterations
-results <- as.data.frame(matrix(ncol = 3, nrow = 30))
-results[, 1] <- 1:30
+max.depth <- 30
+results <- as.data.frame(matrix(ncol = 3, nrow = max.depth))
+results[, 1] <- 1:max.depth
 colnames(results) <- c('Iterations', 'adaBoost', 'gboost')
-for (m in 1:30) {
+for (m in 1:max.depth) {
   cat('Computing results for niter = ', m, '...\n', sep = '')
 
   # My super function
@@ -110,7 +111,7 @@ for (m in 1:30) {
 # Final plot
 cairo_pdf(paste(PATH, 'adaBoost.pdf', sep = ''))
 plot(results[, 2], type = 'l',  xlab ='Tree depth',
-     ylab = 'Success rate', main = 'AdaBoost performance',
+     ylab = 'Success rate', main = 'AdaBoost performance (out-of-sample 20%)',
      col = 'darkblue', lwd = 2)
 lines(results[, 3], col = 'darkred', lwd = 2)
 legend('bottomright', c('adaBoost', 'gboost'),
